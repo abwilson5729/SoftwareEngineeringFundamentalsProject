@@ -12,30 +12,35 @@ public class Main extends Application {
   //The stage we will be showing our scenes in
   public static Stage stage;
   //Map that contains our scenes, using a string as a key
-  public static Map<String, Scene> scenes = new HashMap<String, Scene>();
+  public static Map<String, String> scenes = new HashMap<>();
+  //The current account logged in
+  public static Account currentUser;
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("FXMLDocs/Login.fxml"));
+    //Put fxml urls into the scenes hash map with a key that correlates to their file name
+    scenes.put("Login", "FXMLDocs/Login.fxml");
+    scenes.put("CreateAccount", "FXMLDocs/CreateAccount.fxml");
+    scenes.put("HomePage", "FXMLDocs/HomePage.fxml");
 
-    //Create login scene and put it into scenes map
-    Scene loginScene = new Scene(root, 500, 275);
-    scenes.put("Login", loginScene);
+    //Set up home page scene
+    Parent root = FXMLLoader.load(getClass().getResource(scenes.get("HomePage")));
 
-    root = FXMLLoader.load(getClass().getResource("FXMLDocs/CreateAccount.fxml"));
+    Scene scene = new Scene(root);
 
-    //Create create account scene and put it into scenes map
-    Scene createAccountScene = new Scene(root, 600, 375);
-    scenes.put("CreateAccount", createAccountScene);
-
-    primaryStage.setTitle("FXML Welcome");
-    primaryStage.setScene(scenes.get("Login"));
-
+    primaryStage.setScene(scene);
+    primaryStage.setTitle("Welcome");
     primaryStage.setResizable(false);
 
-    stage = primaryStage;
-
     primaryStage.show();
+
+    //Set stage to primaryStage
+    stage = primaryStage;
+  }
+
+  public static void loadScene(Parent root) {
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
   }
 
   public static void main(String[] args) {

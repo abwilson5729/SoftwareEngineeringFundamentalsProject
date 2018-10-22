@@ -16,43 +16,57 @@ public class SignInController extends Controller {
   @FXML
   private PasswordField password;
 
-  private String accountName;
-
   @FXML
   public void initialize() {
-    //Add text field and text nodes to fields
-    //This is primarily for fields to be checked and to be cleared when scenes are changed
-    fields.add(actionTarget);
-    fields.add(userName);
-    fields.add(password);
+    //Add text field nodes to textFields
+    //This is primarily for textFields to be checked
+    textFields.add(userName);
+    textFields.add(password);
   }
 
   //This handles what happens when the sign in button is clicked
   @FXML
   protected void handleSignInButtonAction(ActionEvent event) {
-    accountName = "";
-
-    //IF all text and password fields are filled
+    //IF all text and password textFields are filled
     if (checkFields()) {
       //IF there is an account with the entered username and password
       if (checkUserAndPassword()) {
         //Notify user whose account you're signing into
-        actionTarget.setText("You're signing into " + accountName + "'s account");
+        try {
+          //Go to home page
+          changeScene("HomePage");
+        } catch (Exception exception) {
+          System.out.println("Exception caught");
+        }
       } else {
         //Notify user that they have entered an invalid username or password
         actionTarget.setText("Invalid username or password");
       }
     } else {
-      //Notify user to fill all text and password fields
-      actionTarget.setText("Please fill all fields");
+      //Notify user to fill all text and password textFields
+      actionTarget.setText("Please fill all textFields");
     }
   }
 
   //This handles what happens when the create account button is clicked
   @FXML
   protected void handleCreateAccountButtonAction(ActionEvent event) {
-    //Change current scene to CreateAccount
-    ChangeScene("CreateAccount");
+    try {
+      //Go to create account
+      changeScene("CreateAccount");
+    } catch (Exception exception) {
+      System.out.println("Exception caught");
+    }
+  }
+
+  @FXML
+  protected void handleReturnToHomepageButtonAction(ActionEvent event) {
+    try {
+      //Go to home page
+      changeScene("HomePage");
+    } catch (Exception exception) {
+      System.out.println("Exception caught");
+    }
   }
 
   public boolean checkUserAndPassword() {
@@ -63,7 +77,8 @@ public class SignInController extends Controller {
         //IF there is an account with entered username and password
         if (account.getUserName().equals(userName.getText()) &&
             account.getPassWord().equals(password.getText())) {
-          accountName = account.getName();
+          //set current user to account being signed in to
+          Main.currentUser = account;
           return true;
         }
       }
