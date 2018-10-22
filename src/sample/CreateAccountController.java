@@ -37,6 +37,8 @@ public class CreateAccountController extends Controller {
     textFields.add(password);
     textFields.add(confirmPassword);
     textFields.add(teamName);
+
+    accountType = AccountType.SPECTATOR;
   }
 
   //This handles what happens when the submit button is clicked
@@ -51,7 +53,7 @@ public class CreateAccountController extends Controller {
           //Create new account
           createAccount();
           //Notify user account has been created
-          actionTarget.setText("Account created");
+          actionTarget.setText("Account created for " + userName.getText());
         } else {
           //Notify user that password and confirm password do not match
           actionTarget.setText("Passwords do not match");
