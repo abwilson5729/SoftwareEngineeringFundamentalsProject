@@ -1,0 +1,31 @@
+Type:SPECTATOR
+User:grego
+Name:Gregorio Lozada
+Password:123
+Teams followed:
+Gregs
+Teams followed end
+grego user end
+Type:MANAGER
+User:grego1
+Name:Gregorio Lozada
+Password:123
+Team:Gregs
+grego1 user end
+Type:PLAYER
+User:grego2
+Name:Gregorio Lozada
+Password:123
+grego2 user end
+Type:MANAGER
+User:richy
+Name:Eugene Richards
+Password:123
+Team:RidiculousRichards
+richy user end
+Type:MANAGER
+User:aCunningHam
+Name:George Cunningham
+Password:123
+Team:Great Georges
+aCunningHam user end

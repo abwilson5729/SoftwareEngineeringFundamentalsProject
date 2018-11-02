@@ -75,10 +75,10 @@ public class SignInController extends Controller {
       //Check all accounts
       for (Account account : Account.accounts) {
         //IF there is an account with entered username and password
-        if (account.getUserName().equals(userName.getText()) &&
-            account.getPassWord().equals(password.getText())) {
+        if (account.getUsername().equals(userName.getText()) &&
+            account.getPassword().equals(password.getText())) {
           //set current user to account being signed in to
-          Main.currentUser = account;
+          Account.currentUser = account;
           return true;
         }
       }
